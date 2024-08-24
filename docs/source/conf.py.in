@@ -7,7 +7,7 @@ from textwrap import dedent
 project = "GNU Radio"
 copyright = "2024, The GNU Radio Project"
 author = "The GNU Radio Project"
-release = "v3.11.0.0git-805-g75a2900c"
+release = "@VERSION@"
 
 # -- General configuration ---------------------------------------------------
 
@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path("/usr/local/lib/python3.10/dist-packages/").resolve(
 sys.path.insert(
     0, str(Path("/usr/local/lib/python3.10/dist-packages/gnuradio/").resolve())
 )
-sys.path.append(str(Path("/home/gaylybailey/projects/gnuradio_projects/gnuradio/docs/source/_extensions").resolve()))
+sys.path.append(str(Path("@PROJECT_SOURCE_DIR@/docs/source/_extensions").resolve()))
 
 extensions = [
     "breathe",
@@ -49,7 +49,7 @@ html_theme_options = {
 # -- Options for Breath / Exhale (C++ documentation generation) --------------
 
 this_file_dir = Path(__file__).parent.resolve()
-doxygen_xml_dir = "/home/gaylybailey/projects/gnuradio_projects/gnuradio/build/docs/xml"
+doxygen_xml_dir = "@PROJECT_BINARY_DIR@/docs/xml"
 
 breathe_projects = {"gnuradio": str(doxygen_xml_dir)}
 breathe_default_project = "gnuradio"

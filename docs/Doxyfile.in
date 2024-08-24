@@ -3,40 +3,39 @@
 ################################################################################
 
 PROJECT_NAME           = "GNU Radio"
-OUTPUT_DIRECTORY       = ../build
+OUTPUT_DIRECTORY       = @PROJECT_BINARY_DIR@/docs/
 
 # XML output stored in ${OUTPUT_DIRECTORY}/${XML_OUTPUT}.  Must agree
 # with what is specified to `breathe_projects` in `conf.py`.
 XML_OUTPUT             = xml
-HTML_OUTPUT            = doxygen/html
 
 # Strip the path prefix.  *MUST* agree with `exhale_args` in conf.py.
 # {repo_root}/docs/cpp/source/../../.. -> {repo_root}
 STRIP_FROM_PATH        = ../../
 
-INPUT                  = ./group_defs.dox \
-                         ../../gnuradio-runtime/include/gnuradio/ \
-                         ../../gnuradio-runtime/include/pmt/ \
-                         ../../gr-analog/include/gnuradio/analog/ \
-                         ../../gr-audio/include/gnuradio/audio/ \
-                         ../../gr-blocks/include/gnuradio/blocks/ \
-                         ../../gr-channels/include/gnuradio/channels/ \
-                         ../../gr-digital/include/gnuradio/digital/ \
-                         ../../gr-dtv/include/gnuradio/dtv/ \
-                         ../../gr-fec/include/gnuradio/fec/ \
-                         ../../gr-fft/include/gnuradio/fft/ \
-                         ../../gr-filter/include/gnuradio/filter/ \
-                         ../../gr-iio/include/gnuradio/iio/ \
-                         ../../gr-network/include/gnuradio/network/ \
-                         ../../gr-pdu/include/gnuradio/pdu/ \
-                         ../../gr-qtgui/include/gnuradio/qtgui/ \
-                         ../../gr-soapy/include/gnuradio/soapy/ \
-                         ../../gr-trellis/include/gnuradio/trellis/ \
-                         ../../gr-uhd/include/gnuradio/uhd/ \
-                         ../../gr-video-sdl/include/gnuradio/video_sdl/ \
-                         ../../gr-vocoder/include/gnuradio/vocoder/ \
-                         ../../gr-wavelet/include/gnuradio/wavelet/ \
-                         ../../gr-zeromq/include/gnuradio/zeromq/ \
+INPUT                  = @PROJECT_SOURCE_DIR@/docs/source/group_defs.dox \
+                         @PROJECT_SOURCE_DIR@/gnuradio-runtime/include/gnuradio/ \
+                         @PROJECT_SOURCE_DIR@/gnuradio-runtime/include/pmt/ \
+                         @PROJECT_SOURCE_DIR@/gr-analog/include/gnuradio/analog/ \
+                         @PROJECT_SOURCE_DIR@/gr-audio/include/gnuradio/audio/ \
+                         @PROJECT_SOURCE_DIR@/gr-blocks/include/gnuradio/blocks/ \
+                         @PROJECT_SOURCE_DIR@/gr-channels/include/gnuradio/channels/ \
+                         @PROJECT_SOURCE_DIR@/gr-digital/include/gnuradio/digital/ \
+                         @PROJECT_SOURCE_DIR@/gr-dtv/include/gnuradio/dtv/ \
+                         @PROJECT_SOURCE_DIR@/gr-fec/include/gnuradio/fec/ \
+                         @PROJECT_SOURCE_DIR@/gr-fft/include/gnuradio/fft/ \
+                         @PROJECT_SOURCE_DIR@/gr-filter/include/gnuradio/filter/ \
+                         @PROJECT_SOURCE_DIR@/gr-iio/include/gnuradio/iio/ \
+                         @PROJECT_SOURCE_DIR@/gr-network/include/gnuradio/network/ \
+                         @PROJECT_SOURCE_DIR@/gr-pdu/include/gnuradio/pdu/ \
+                         @PROJECT_SOURCE_DIR@/gr-qtgui/include/gnuradio/qtgui/ \
+                         @PROJECT_SOURCE_DIR@/gr-soapy/include/gnuradio/soapy/ \
+                         @PROJECT_SOURCE_DIR@/gr-trellis/include/gnuradio/trellis/ \
+                         @PROJECT_SOURCE_DIR@/gr-uhd/include/gnuradio/uhd/ \
+                         @PROJECT_SOURCE_DIR@/gr-video-sdl/include/gnuradio/video_sdl/ \
+                         @PROJECT_SOURCE_DIR@/gr-vocoder/include/gnuradio/vocoder/ \
+                         @PROJECT_SOURCE_DIR@/gr-wavelet/include/gnuradio/wavelet/ \
+                         @PROJECT_SOURCE_DIR@/gr-zeromq/include/gnuradio/zeromq/ \
 #
 # Don't include .cpp files!
 FILE_PATTERNS          = *.h \
@@ -60,7 +59,7 @@ BUILTIN_STL_SUPPORT    = YES
 ################################################################################
 
 # Set to YES if you are debugging or want to compare.
-GENERATE_HTML          = YES
+GENERATE_HTML          = NO
 # Unless you want it...
 GENERATE_LATEX         = NO
 # Both breathe and exhale need the xml.

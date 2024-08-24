@@ -4,7 +4,7 @@ find_package(pybind11 REQUIRED)
 
 macro(GR_PYBIND_MAKE name updir filter files)
 
-    configure_file(${PROJECT_SOURCE_DIR}/docs/doxygen/pydoc_macros.h
+    configure_file(${PROJECT_SOURCE_DIR}/docs/source/pydoc_macros.h
                    ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
     pybind11_add_module(${name}_python ${files})
@@ -56,7 +56,7 @@ endmacro(GR_PYBIND_MAKE)
 
 macro(GR_PYBIND_MAKE_CHECK_HASH name updir filter files)
 
-    configure_file(${PROJECT_SOURCE_DIR}/docs/doxygen/pydoc_macros.h
+    configure_file(${PROJECT_SOURCE_DIR}/docs/source/pydoc_macros.h
                    ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
     list(APPEND regen_targets "")
@@ -281,7 +281,7 @@ macro(GR_PYBIND_MAKE_OOT name updir filter files)
         endif()
     endforeach()
 
-    configure_file(${PROJECT_SOURCE_DIR}/docs/doxygen/pydoc_macros.h
+    configure_file(${PROJECT_SOURCE_DIR}/docs/doxygen/source/pydoc_macros.h
                    ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
     pybind11_add_module(${name}_python ${files})
