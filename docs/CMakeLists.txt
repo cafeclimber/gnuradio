@@ -41,6 +41,8 @@ if(ENABLE_DOCS)
     set(DOXYFILE_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 
     file(MAKE_DIRECTORY ${DOXYGEN_OUTPUT_DIR}) #Doxygen won't create this for us
+
+
     add_custom_command(OUTPUT ${DOXYGEN_INDEX_FILE}
                        COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYFILE_OUT}
                        MAIN_DEPENDENCY ${DOXYFILE_OUT} ${DOXYFILE_IN}
@@ -48,6 +50,17 @@ if(ENABLE_DOCS)
 
     add_custom_target(doxygen ALL DEPENDS ${DOXYGEN_INDEX_FILE})
 
+    add_custom_command(
+        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/gnuradio_docstrings.json
+        COMMAND
+            ${PYTHON_EXECUTABLE} ${PROJECT_SOURCE_DIR}/docs/update_pydoc.py
+            "scrape" "--xml_path" ${PROJECT_BINARY_DIR}/docs/xml "--json_path"
+            ${CMAKE_CURRENT_BINARY_DIR}/gnuradio_docstrings.json
+        COMMENT "Scraping generated documentation for docstrings ..."
+        DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/update_pydoc.py doxygen)
+
+    add_custom_target(gnuradio_docstrings ALL
+                      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/gnuradio_docstrings.json)
     ########################################################################
     # Make and install sphinx docs
     ########################################################################
