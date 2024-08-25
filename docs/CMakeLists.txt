@@ -57,7 +57,7 @@ if(ENABLE_DOCS)
     configure_file(${SPHINX_SOURCE}/conf.py.in
                    ${SPHINX_SOURCE}/conf.py @ONLY)
 
-    add_custom_target(sphinx ALL
+    add_custom_target(docs ALL
                       COMMAND
                       ${SPHINX_EXECUTABLE} -b html
                       ${SPHINX_SOURCE} ${SPHINX_BUILD}
