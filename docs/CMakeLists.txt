@@ -8,21 +8,21 @@
 ########################################################################
 # Setup dependencies
 ########################################################################
+find_package(Doxygen REQUIRED)
+find_package(Sphinx REQUIRED)
 
 ########################################################################
 # Register components
 ########################################################################
 include(GrComponent)
 # gr_register_component("doxygen" ENABLE_DOXYGEN DOXYGEN_FOUND)
-gr_register_component("docs" ENABLE_DOCS SPHINX_FOUND)
+gr_register_component("docs" ENABLE_DOCS DOXYGEN_FOUND)
 # gr_register_component("man-pages" ENABLE_MANPAGES)
 
 ########################################################################
 # Begin conditional configuration
 ########################################################################
 if(ENABLE_DOCS)
-    find_package(Doxygen REQUIRED)
-    find_package(Sphinx REQUIRED)
 
     ########################################################################
     # Create the doxygen configuration file
