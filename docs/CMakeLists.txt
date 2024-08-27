@@ -14,7 +14,7 @@
 ########################################################################
 include(GrComponent)
 # gr_register_component("doxygen" ENABLE_DOXYGEN DOXYGEN_FOUND)
-gr_register_component("docs" ENABLE_DOCS DOXYGEN_FOUND SPHINX_FOUND)
+gr_register_component("docs" ENABLE_DOCS SPHINX_FOUND)
 # gr_register_component("man-pages" ENABLE_MANPAGES)
 
 ########################################################################
