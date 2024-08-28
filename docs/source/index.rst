@@ -7,6 +7,7 @@ Welcome to GNU Radio's documentation!
    :titlesonly:
 
    Home <self>
+   contributing/index
    blocks/index
    api/index
 

@@ -21,6 +21,7 @@ sys.path.append(str(Path("@PROJECT_SOURCE_DIR@/docs/source/_extensions").resolve
 extensions = [
     "breathe",
     "gr_wiki_link",
+    "myst_parser",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx_tabs.tabs",
