@@ -1,0 +1,14 @@
+.. _exhale_typedef_namespacegr_1a4812df667c263948731b25a7063b427d:
+
+Typedef gr::block_viter_t
+=========================
+
+- Defined in :ref:`file_gnuradio_gnuradio-runtime_include_gnuradio_block.h`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: gr::block_viter_t
+   :project: gnuradio

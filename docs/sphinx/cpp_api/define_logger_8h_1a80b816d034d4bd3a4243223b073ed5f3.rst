@@ -1,0 +1,14 @@
+.. _exhale_define_logger_8h_1a80b816d034d4bd3a4243223b073ed5f3:
+
+Define GR_LOG_INFO
+==================
+
+- Defined in :ref:`file_gnuradio_gnuradio-runtime_include_gnuradio_logger.h`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: GR_LOG_INFO
+   :project: gnuradio

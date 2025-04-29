@@ -1,0 +1,14 @@
+.. _exhale_variable_probe__avg__mag__sqrd__cf__pydoc__template_8h_1a8ed435a11c97e74b164bde2345f56746:
+
+Variable __doc_gr_analog_probe_avg_mag_sqrd_cf_set_threshold
+============================================================
+
+- Defined in :ref:`file_gnuradio_gr-analog_python_analog_bindings_docstrings_probe_avg_mag_sqrd_cf_pydoc_template.h`
+
+
+Variable Documentation
+----------------------
+
+
+.. doxygenvariable:: __doc_gr_analog_probe_avg_mag_sqrd_cf_set_threshold
+   :project: gnuradio

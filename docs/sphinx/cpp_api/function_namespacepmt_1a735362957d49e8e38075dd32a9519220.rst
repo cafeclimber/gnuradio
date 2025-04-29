@@ -1,0 +1,14 @@
+.. _exhale_function_namespacepmt_1a735362957d49e8e38075dd32a9519220:
+
+Function pmt::is_u64vector
+==========================
+
+- Defined in :ref:`file_gnuradio_gnuradio-runtime_include_pmt_pmt.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: pmt::is_u64vector(pmt_t)
+   :project: gnuradio

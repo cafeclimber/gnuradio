@@ -1,0 +1,14 @@
+.. _exhale_define_math_8h_1aa14fb267e01eae3f30667805c898205e:
+
+Define GR_M_SQRT2
+=================
+
+- Defined in :ref:`file_gnuradio_gnuradio-runtime_include_gnuradio_math.h`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: GR_M_SQRT2
+   :project: gnuradio

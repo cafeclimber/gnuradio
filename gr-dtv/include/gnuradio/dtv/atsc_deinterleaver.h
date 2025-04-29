@@ -19,7 +19,8 @@ namespace dtv {
 
 /*!
  * \brief ATSC deinterleave RS encoded ATSC data ( atsc_mpeg_packet_rs_encoded -->
- * atsc_mpeg_packet_rs_encoded) \ingroup dtv_atsc
+ * atsc_mpeg_packet_rs_encoded)
+ * \ingroup block_dtv_atsc_deinterleaver
  *
  * input: atsc_mpeg_packet_rs_encoded; output: atsc_mpeg_packet_rs_encoded
  */

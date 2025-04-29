@@ -22,6 +22,8 @@ namespace analog {
 /*!
  * \brief signal generator with T output.
  * \ingroup block_analog_sig_source
+ * \ingroup block_analog_sig_source
+ * \ingroup block_analog_sig_source
  */
 template <class T>
 class ANALOG_API sig_source : virtual public sync_block

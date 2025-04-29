@@ -1,0 +1,14 @@
+.. _exhale_function_namespacegr_1a1f8807471b012b59096121a4801291e2:
+
+Function gr::sysconfdir
+=======================
+
+- Defined in :ref:`file_gnuradio_gnuradio-runtime_include_gnuradio_constants.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: gr::sysconfdir()
+   :project: gnuradio

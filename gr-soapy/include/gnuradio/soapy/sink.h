@@ -20,7 +20,6 @@ namespace gr {
 namespace soapy {
 
 /*!
- * \addtogroup block
  * \brief <b>Sink</b> block implements SoapySDR functionality for RX.
  * \ingroup block_soapy_sink
  * \section sink Soapy Sink

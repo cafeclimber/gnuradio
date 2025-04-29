@@ -1,0 +1,51 @@
+
+.. _program_listing_file_gnuradio_gr-analog_include_gnuradio_analog_probe_avg_mag_sqrd_c.h:
+
+Program Listing for File probe_avg_mag_sqrd_c.h
+===============================================
+
+|exhale_lsh| :ref:`Return to documentation for file <file_gnuradio_gr-analog_include_gnuradio_analog_probe_avg_mag_sqrd_c.h>` (``gnuradio/gr-analog/include/gnuradio/analog/probe_avg_mag_sqrd_c.h``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. code-block:: cpp
+
+   /* -*- c++ -*- */
+   /*
+    * Copyright 2005,2006,2012 Free Software Foundation, Inc.
+    *
+    * This file is part of GNU Radio
+    *
+    * SPDX-License-Identifier: GPL-3.0-or-later
+    *
+    */
+   #ifndef INCLUDED_ANALOG_PROBE_AVG_MAG_SQRD_C_H
+   #define INCLUDED_ANALOG_PROBE_AVG_MAG_SQRD_C_H
+   
+   #include <gnuradio/analog/api.h>
+   #include <gnuradio/sync_block.h>
+   
+   namespace gr {
+   namespace analog {
+   
+   class ANALOG_API probe_avg_mag_sqrd_c : virtual public sync_block
+   {
+   public:
+       // gr::analog::probe_avg_mag_sqrd_c::sptr
+       typedef std::shared_ptr<probe_avg_mag_sqrd_c> sptr;
+   
+       static sptr make(double threshold_db, double alpha = 0.0001);
+   
+       virtual bool unmuted() const = 0;
+       virtual double level() const = 0;
+       virtual double threshold() const = 0;
+   
+       virtual void set_alpha(double alpha) = 0;
+       virtual void set_threshold(double decibels) = 0;
+       virtual void reset() = 0;
+   };
+   
+   } /* namespace analog */
+   } /* namespace gr */
+   
+   #endif /* INCLUDED_ANALOG_PROBE_AVG_MAG_SQRD_C_H */

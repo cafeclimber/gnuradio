@@ -20,7 +20,6 @@ namespace gr {
 namespace soapy {
 
 /*!
- * \addtogroup block
  * \brief <b>Source</b> block implements SoapySDR functionality for RX.
  * \ingroup block_soapy_source
  * \section source Soapy Source

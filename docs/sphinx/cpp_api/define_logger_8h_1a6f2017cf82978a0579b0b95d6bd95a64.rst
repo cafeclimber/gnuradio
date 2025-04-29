@@ -1,0 +1,14 @@
+.. _exhale_define_logger_8h_1a6f2017cf82978a0579b0b95d6bd95a64:
+
+Define GR_LOG_CRIT
+==================
+
+- Defined in :ref:`file_gnuradio_gnuradio-runtime_include_gnuradio_logger.h`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: GR_LOG_CRIT
+   :project: gnuradio

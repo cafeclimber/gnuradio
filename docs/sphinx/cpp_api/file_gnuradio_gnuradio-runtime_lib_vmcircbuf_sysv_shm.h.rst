@@ -1,0 +1,55 @@
+
+.. _file_gnuradio_gnuradio-runtime_lib_vmcircbuf_sysv_shm.h:
+
+File vmcircbuf_sysv_shm.h
+=========================
+
+|exhale_lsh| :ref:`Parent directory <dir_gnuradio_gnuradio-runtime_lib>` (``gnuradio/gnuradio-runtime/lib``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Page Contents
+   :local:
+   :backlinks: none
+
+Definition (``gnuradio/gnuradio-runtime/lib/vmcircbuf_sysv_shm.h``)
+-------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_gnuradio_gnuradio-runtime_lib_vmcircbuf_sysv_shm.h.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``gnuradio/api.h`` (:ref:`file_gnuradio_gnuradio-runtime_include_gnuradio_api.h`)
+
+- ``vmcircbuf.h`` (:ref:`file_gnuradio_gnuradio-runtime_lib_vmcircbuf.h`)
+
+
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_gr`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classgr_1_1vmcircbuf__sysv__shm`
+
+- :ref:`exhale_class_classgr_1_1vmcircbuf__sysv__shm__factory`
+

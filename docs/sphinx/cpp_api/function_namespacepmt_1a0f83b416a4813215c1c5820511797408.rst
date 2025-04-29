@@ -1,0 +1,14 @@
+.. _exhale_function_namespacepmt_1a0f83b416a4813215c1c5820511797408:
+
+Function pmt::from_complex(const std::complex<double>&)
+=======================================================
+
+- Defined in :ref:`file_gnuradio_gnuradio-runtime_include_pmt_pmt.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: pmt::from_complex(const std::complex<double>&)
+   :project: gnuradio

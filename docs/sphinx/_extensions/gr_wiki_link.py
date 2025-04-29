@@ -3,15 +3,13 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Any
     from collections.abc import Sequence
+    from typing import Any
 
     from docutils.nodes import Node, system_message
     from docutils.parsers.rst.states import Inliner
 
 from docutils import nodes
-
-from sphinx.locale import _
 
 
 def gr_wiki_link_role(
@@ -29,15 +27,9 @@ def gr_wiki_link_role(
     document and a list of system messages.  Both are allowed to be
     empty.
 
-    :param name: The role name used in the document.
     :param rawtext: The entire markup snippet, with role.
     :param text: The text marked with the role.
-    :param lineno: The line number where rawtext appears in the input.
-    :param inliner: The inliner instance that called us.
-    :param options: Directive options for customization.
-    :param content: The directive content for customization.
     """
-    app = inliner.document.settings.env.app
     pnode = nodes.reference(
         rawtext,
         "See Wiki",
@@ -50,4 +42,8 @@ def gr_wiki_link_role(
 
 def setup(app):
     app.add_role("gr-wiki-link", gr_wiki_link_role)
-    return
+    return {
+        "version": "0.1",
+        "parallel_read_safe": True,
+        "parallel_write_safe": True,
+    }

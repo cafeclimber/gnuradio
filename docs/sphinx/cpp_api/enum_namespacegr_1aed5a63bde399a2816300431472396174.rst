@@ -1,0 +1,14 @@
+.. _exhale_enum_namespacegr_1aed5a63bde399a2816300431472396174:
+
+Enum buffer_mapping_type
+========================
+
+- Defined in :ref:`file_gnuradio_gnuradio-runtime_include_gnuradio_buffer.h`
+
+
+Enum Documentation
+------------------
+
+
+.. doxygenenum:: gr::buffer_mapping_type
+   :project: gnuradio

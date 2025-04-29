@@ -1,0 +1,14 @@
+.. _exhale_typedef_namespacegr_1_1thread_1a2207528267c984d64944456ddb325788:
+
+Typedef gr::thread::barrier
+===========================
+
+- Defined in :ref:`file_gnuradio_gnuradio-runtime_include_gnuradio_thread_thread.h`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: gr::thread::barrier
+   :project: gnuradio

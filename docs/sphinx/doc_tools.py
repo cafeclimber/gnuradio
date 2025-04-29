@@ -1,9 +1,37 @@
 import re
+from importlib import import_module
 from pathlib import Path
+from string import Template
 from textwrap import dedent
 
 from gnuradio import gr
 from gnuradio.grc.core import platform
+
+# block_mods = [
+#     "analog",
+#     "audio",
+#     "blocks",
+#     "channels",
+#     "digital",
+#     "dtv",
+#     "fec",
+#     "fft",
+#     "filter",
+#     "iio",
+#     "network",
+#     "pdu",
+#     "qtgui",
+#     "soapy",
+#     "trellis",
+#     "uhd",
+#     "video-sdl",
+#     "vocoder",
+#     "wavelet",
+#     "zeromq",
+# ]
+# for mod in block_mods:
+#     import_module(f"gnuradio.{mod.replace('-', '_')}")
+
 
 filename_bits_to_ignore = [
     "_bb",
@@ -30,26 +58,36 @@ filename_bits_to_ignore = [
     "_bf",
     "_x",
     "_xx",
+    "_xxx",
+    "_xb",
+    "_vx",
+    "_vxx",
 ]
 
 path_replacements = [
-    (" ","_"),
-    ("/","_"),
-    ("\\","_"),
-    ("-","_"),
-    ("(",""),
-    (")",""),
-    ("[",""),
-    ("]",""),
-    (":",""),
+    (" ", "_"),
+    ("/", "_"),
+    ("\\", "_"),
+    ("-", "_"),
+    ("(", ""),
+    (")", ""),
+    ("[", ""),
+    ("]", ""),
+    (":", ""),
 ]
 
+
 def block_to_group_name(block):
+    print(block.__name__, end="")
     group_name = f"block_{block.__name__}"
+    if group_name == "blocks_probe_signal_vx":
+        group_name = "blocks_probe_signal_v"
     for bit in filename_bits_to_ignore:
         group_name = group_name.removesuffix(bit)
 
+    print(f"\t{group_name}")
     return group_name
+
 
 def fix_path_name(f_name):
     for old, new in path_replacements:
@@ -57,6 +95,26 @@ def fix_path_name(f_name):
 
     return f_name
 
+
+def get_block_types(block):
+    print(f"{block.__name__}")
+    try:
+        types = next(param for param in block.parameters_data if param["id"] == "type")
+    except StopIteration:
+        return []
+    try:
+        return types["option_attributes"]["fcn"]
+    except KeyError:
+        return []
+
+
+def get_block_make_fcns(block):
+    types = get_block_types(block)
+    if len(types) == 0:
+        return []
+    make = Template(block.templates["make"].replace("{", "").replace("}", ""))
+    funcs = [make.safe_substitute(type=t) for t in types]
+    return [re.sub(r"(\w+\..*)\.fcn\(.*\)", r"\1", f) for f in funcs]
 
 
 def get_block_tree():
@@ -85,7 +143,6 @@ def get_block_tree():
 def _make_doxy_groups(tree, file_handle):
     for k, v in tree.items():
         if isinstance(v, dict):
-            print(f"{'=' * 20} {k} {'=' * 20}")
             group_name = f"blocks_{k.lower().replace(' ', '_').replace('/', '_')}"
             file_handle.write(rf"/*! \defgroup {group_name} {k}")
             file_handle.write("\n")
@@ -94,16 +151,14 @@ def _make_doxy_groups(tree, file_handle):
             _make_doxy_groups(v, file_handle)
             file_handle.write("\n/*! @} */\n\n")
         else:
-            print(f"{v}:\t", end="")
             group_name = block_to_group_name(v)
-            print(group_name)
             file_handle.write(rf"/*! \defgroup {group_name} {k} */")
             file_handle.write("\n")
 
 
 def make_doxy_groups(tree):
     top_matter = dedent(
-        r"""\
+        r"""
         # Copyright (C) 2017 Free Software Foundation, Inc.
         #
         # Permission is granted to copy, distribute and/or modify this document
@@ -113,11 +168,10 @@ def make_doxy_groups(tree):
         # A copy of the license is included in the section entitled "GNU
         # Free Documentation License".
 
-        /*!
-        * \defgroup block GNU Radio Blocks
-        * \\brief All blocks that can be used in GR graphs are listed here or in
-        * the subcategories below.
-        *
+        /*! \defgroup blocks GNU Radio Blocks
+         * \brief All blocks that can be used in GR graphs are listed here or in
+         * the subcategories below.
+         * @{ */\n
     """,
     )
 
@@ -125,36 +179,13 @@ def make_doxy_groups(tree):
     doxy_group_defs_path = (
         current_dir / "../../doxygen/other/group_defs.dox"
     ).resolve()
-    with open(doxy_group_defs_path, "w") as ff:
+    with doxy_group_defs_path.open("w") as ff:
         ff.write(top_matter)
-        ff.write("* @{ */\n\n")
         _make_doxy_groups(tree["Core"], ff)
         ff.write("\n/*! @} */\n")
 
 
 def fix_doxy_groups():
-    block_mods = [
-        "analog",
-        "audio",
-        "blocks",
-        "channels",
-        "digital",
-        "dtv",
-        "fec",
-        "fft",
-        "filter",
-        "iio",
-        "network",
-        "pdu",
-        "qtgui",
-        "soapy",
-        "trellis",
-        "uhd",
-        "video-sdl",
-        "vocoder",
-        "wavelet",
-        "zeromq",
-    ]
     paths = [
         (
             Path("../../") / ("gr-" + x) / "include" / "gnuradio" / x.replace("-", "_")
@@ -163,7 +194,6 @@ def fix_doxy_groups():
     ]
 
     for path in paths:
-        print(f"{'='*10} {path.name} {'='*10}")
         blocks = [p for p in path.iterdir() if p.suffix == ".h" and p.name != "api.h"]
         for block in blocks:
             group_stem = str(block.stem)
@@ -177,9 +207,6 @@ def fix_doxy_groups():
                 is_block = re.search(r"\ *\*\ *\\ingroup\ *(\w*)", a) is not None
 
             if is_block:
-                print(
-                    f"[{path.name}]\tUpdating {block.stem} with group name {group_name}"
-                )
                 updated = re.sub(r"(\ *\*\ *\\ingroup\ *)(\w*)", rf"\1{group_name}", a)
                 with block.open("w") as ff:
                     ff.write(updated)
@@ -193,22 +220,19 @@ def _make_rst_files(tree, doc_path):
 
             path = doc_path / fix_path_name(k)
             path.mkdir(exist_ok=True)
-            with open(path / "index.rst", "w") as ff:
-                index_file_contents = dedent(
-                    f"""\
-                    {'-' * len(k)}
-                    {k}
-                    {'-' * len(k)}
 
-                    .. toctree::
-                       :hidden:
-                       :glob:
+            with (path / "index.rst").open("w") as ff:
+                ff.write(f"{'-' * len(k)}" + "\n")
+                ff.write(f"{k}" + "\n")
+                ff.write(f"{'-' * len(k)}" + "\n\n")
+                ff.write(".. toctree::\n")
+                ff.write("   :maxdepth: 1\n")
+                ff.write("   :glob:\n\n")
+                if has_children:
+                    ff.write("   */index\n")
+                if not only_children:
+                    ff.write("   *")
 
-                       {'*/index' if has_children else ''}
-                       {'*' if not only_children else ''}
-                """,
-                )
-                ff.write(index_file_contents)
             _make_rst_files(v, path)
         else:
 
@@ -220,7 +244,7 @@ def _make_rst_files(tree, doc_path):
             if k == "Python Block":
                 params_table = ""
 
-            with open(path, "w") as ff:
+            with path.open("w") as ff:
                 # Multiline f-strings cause weird shenanigans with dedent, so
                 # have to use string concatenation
                 contents = dedent(
@@ -233,34 +257,28 @@ def _make_rst_files(tree, doc_path):
 
                     Parameters
                     **********
+
                 """,
                 )
-                contents += params_table
-                contents += dedent(
-                    f"""
-                    Class Reference
-                    *******************
-
-                    .. tabs::
-                        .. group-tab:: C++
-
-                            .. doxygengroup:: {block_to_group_name(v)}
-                                :content-only:
-                                :undoc-members:
-                                :private-members:
-                                :members:
-
-                        .. group-tab:: Python
-
-                            TODO
-                """,
-                )
+                contents += f"{params_table}\n"
+                contents += "Class Reference\n"
+                contents += "*******************\n\n"
+                contents += ".. tabs::\n\n"
+                contents += "   .. group-tab:: Python\n"
+                contents += "      TODO\n\n"
+                if hasattr(v, "cpp_templates"):
+                    contents += "   .. group-tab:: C++\n\n"
+                    contents += f"      .. doxygengroup:: {block_to_group_name(v)}\n"
+                    contents += "         :content-only:\n"
+                    contents += "         :undoc-members:\n"
+                    contents += "         :private-members:\n"
+                    contents += "         :members:\n\n"
 
                 ff.write(contents)
 
 
 def _make_params_table(params: list) -> str:
-    cell_w = 25 # Minimimum cell width
+    cell_w = 25  # Minimimum cell width
 
     for param in params:
         if "$" in param.get("dtype", ""):
@@ -272,7 +290,6 @@ def _make_params_table(params: list) -> str:
         c = str(param.get("dtype", ""))
         d = str(param.get("default", ""))
 
-
         m = len(max([a, b, c, d], key=len))
         if m > cell_w:
             cell_w = m
@@ -282,7 +299,6 @@ def _make_params_table(params: list) -> str:
     headers += f"+{'='*cell_w}+{'='*cell_w}+{'='*cell_w}+{'='*cell_w}+{'='*cell_w}+\n"
 
     table = [dedent(headers)]
-
 
     for param in params:
         if "$" in param.get("dtype", ""):
@@ -307,17 +323,17 @@ def make_rst_files(tree):
     block_docs_path = current_dir / "blocks"
     if not block_docs_path.exists():
         block_docs_path.mkdir()
-    with open(block_docs_path / "index.rst", "w") as ff:
+    with (block_docs_path / "index.rst").open("w") as ff:
         block_root_doc = dedent(
             """\
             Built-in Blocks
             ===============
 
             .. toctree::
-            \t:titlesonly:
-            \t:glob:
+               :maxdepth: 1
+               :glob:
 
-            \t*/index
+               */index
         """,
         )
         ff.write(block_root_doc)
@@ -326,6 +342,6 @@ def make_rst_files(tree):
 
 if __name__ == "__main__":
     block_tree = get_block_tree()
-    fix_doxy_groups()
-    make_doxy_groups(block_tree)
+    # fix_doxy_groups()
+    # make_doxy_groups(block_tree)
     make_rst_files(block_tree)

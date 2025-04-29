@@ -1,0 +1,14 @@
+.. _exhale_function_expj_8h_1a7d0144e5774158b746199c1da4d5b5ac:
+
+Function gr_expj
+================
+
+- Defined in :ref:`file_gnuradio_gnuradio-runtime_include_gnuradio_expj.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: gr_expj(float)
+   :project: gnuradio

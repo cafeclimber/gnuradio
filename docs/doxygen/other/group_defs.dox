@@ -1,20 +1,17 @@
-\
-        # Copyright (C) 2017 Free Software Foundation, Inc.
-        #
-        # Permission is granted to copy, distribute and/or modify this document
-        # under the terms of the GNU Free Documentation License, Version 1.3
-        # or any later version published by the Free Software Foundation;
-        # with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
-        # A copy of the license is included in the section entitled "GNU
-        # Free Documentation License".
 
-        /*!
-        * \defgroup block GNU Radio Blocks
-        * \\brief All blocks that can be used in GR graphs are listed here or in
-        * the subcategories below.
-        *
-* @{ */
+# Copyright (C) 2017 Free Software Foundation, Inc.
+#
+# Permission is granted to copy, distribute and/or modify this document
+# under the terms of the GNU Free Documentation License, Version 1.3
+# or any later version published by the Free Software Foundation;
+# with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+# A copy of the license is included in the section entitled "GNU
+# Free Documentation License".
 
+/*! \defgroup blocks GNU Radio Blocks
+ * \brief All blocks that can be used in GR graphs are listed here or in
+ * the subcategories below.
+ * @{ */\n
 /*! \defgroup blocks_misc Misc
  * @{
  */
@@ -132,7 +129,7 @@
 /*! \defgroup block_analog_dpll Detect Peak */
 /*! \defgroup block_blocks_burst_tagger Burst Tagger */
 /*! \defgroup block_blocks_peak_detector2 Peak Detector2 */
-/*! \defgroup block_blocks_peak_detector_xb Peak Detector */
+/*! \defgroup block_blocks_peak_detector Peak Detector */
 /*! \defgroup block_blocks_plateau_detector Plateau Detector */
 
 /*! @} */
@@ -147,7 +144,7 @@
 /*! \defgroup block_digital_corr_est Correlation Estimator */
 /*! \defgroup block_digital_costas_loop Costas Loop */
 /*! \defgroup block_digital_fll_band_edge FLL Band-Edge */
-/*! \defgroup block_digital_pfb_clock_sync_xxx Polyphase Clock Sync */
+/*! \defgroup block_digital_pfb_clock_sync Polyphase Clock Sync */
 /*! \defgroup block_digital_pn_correlator PN Correlator */
 /*! \defgroup block_digital_symbol_sync Symbol Sync */
 
@@ -161,7 +158,7 @@
 /*! \defgroup block_blocks_ctrlport_probe2 Ctrlport Probe */
 /*! \defgroup block_blocks_ctrlport_probe Ctrlport Complex Probe */
 /*! \defgroup block_blocks_probe_rate Probe Rate */
-/*! \defgroup block_blocks_probe_signal_vx Probe Signal Vector */
+/*! \defgroup block_blocks_probe_signal Probe Signal Vector */
 /*! \defgroup block_blocks_probe_signal Probe Signal */
 /*! \defgroup block_digital_mpsk_snr_est MPSK SNR Estimator */
 /*! \defgroup block_digital_probe_density Probe Density */
@@ -203,7 +200,7 @@
  */
 
 /*! \defgroup block_blocks_abs Abs */
-/*! \defgroup block_blocks_add_const_vxx Add Const */
+/*! \defgroup block_blocks_add_const Add Const */
 /*! \defgroup block_blocks_add Add */
 /*! \defgroup block_blocks_argmax Argmax */
 /*! \defgroup block_blocks_conjugate Complex Conjugate */
@@ -215,7 +212,7 @@
 /*! \defgroup block_blocks_min Min */
 /*! \defgroup block_blocks_multiply_by_tag_value Multiply by Tag Value */
 /*! \defgroup block_blocks_multiply_conjugate Multiply Conjugate */
-/*! \defgroup block_blocks_multiply_const_vxx Multiply Const */
+/*! \defgroup block_blocks_multiply_const Multiply Const */
 /*! \defgroup block_blocks_multiply_const Fast Multiply Const */
 /*! \defgroup block_blocks_multiply_matrix Multiply by Matrix */
 /*! \defgroup block_blocks_multiply Multiply */
@@ -681,7 +678,7 @@
  * @{
  */
 
-/*! \defgroup block_fft_vxx FFT */
+/*! \defgroup block_fft FFT */
 /*! \defgroup block_goertzel Goertzel */
 /*! \defgroup block_logpwrfft Log Power FFT */
 
@@ -694,16 +691,16 @@
 /*! \defgroup block_band_pass_filter Band Pass Filter */
 /*! \defgroup block_band_reject_filter Band Reject Filter */
 /*! \defgroup block_dc_blocker DC Blocker */
-/*! \defgroup block_fft_filter_xxx FFT Filter */
+/*! \defgroup block_fft_filter FFT Filter */
 /*! \defgroup block_filter_fft_low_pass_filter FFT Low Pass Filter */
 /*! \defgroup block_filter_fft_rrc_filter FFT Root Raised Cosine Filter */
 /*! \defgroup block_filter_delay Filter Delay */
 /*! \defgroup block_filterbank_vcvcf Generic Filterbank */
-/*! \defgroup block_fir_filter_xxx Decimating FIR Filter */
+/*! \defgroup block_fir_filter Decimating FIR Filter */
 /*! \defgroup block_high_pass_filter High Pass Filter */
 /*! \defgroup block_hilbert Hilbert */
-/*! \defgroup block_iir_filter_xxx IIR Filter */
-/*! \defgroup block_interp_fir_filter_xxx Interpolating FIR Filter */
+/*! \defgroup block_iir_filter IIR Filter */
+/*! \defgroup block_interp_fir_filter Interpolating FIR Filter */
 /*! \defgroup block_low_pass_filter Low Pass Filter */
 /*! \defgroup block_root_raised_cosine_filter Root Raised Cosine Filter */
 /*! \defgroup block_single_pole_iir_filter Single Pole IIR Filter */
@@ -721,7 +718,7 @@
  */
 
 /*! \defgroup block_freq_xlating_fft_filter Frequency Xlating FFT Filter */
-/*! \defgroup block_freq_xlating_fir_filter_xxx Frequency Xlating FIR Filter */
+/*! \defgroup block_freq_xlating_fir_filter Frequency Xlating FIR Filter */
 /*! \defgroup block_pfb_channelizer Polyphase Channelizer */
 /*! \defgroup block_pfb_channelizer_hier Hierarchical Polyphase Channelizer */
 /*! \defgroup block_pfb_decimator Polyphase Decimator */
@@ -736,8 +733,8 @@
 
 /*! \defgroup block_ival_decimator Interleaved Stream Decimator */
 /*! \defgroup block_mmse_resampler Fractional Resampler */
-/*! \defgroup block_pfb_arb_resampler_xxx Polyphase Arbitrary Resampler */
-/*! \defgroup block_rational_resampler_xxx Rational Resampler */
+/*! \defgroup block_pfb_arb_resampler Polyphase Arbitrary Resampler */
+/*! \defgroup block_rational_resampler Rational Resampler */
 
 /*! @} */
 

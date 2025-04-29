@@ -1,0 +1,14 @@
+.. _exhale_function_xoroshiro128p_8h_1a616a08c6441f9c1651d475401e245f3d:
+
+Function rotl
+=============
+
+- Defined in :ref:`file_gnuradio_gnuradio-runtime_include_gnuradio_xoroshiro128p.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: rotl(const uint64_t, const int)
+   :project: gnuradio

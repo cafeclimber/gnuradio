@@ -1,0 +1,14 @@
+.. _exhale_function_namespacepmt_1aed967ee67b823239952f442258499390:
+
+Function pmt::is_u16vector
+==========================
+
+- Defined in :ref:`file_gnuradio_gnuradio-runtime_include_pmt_pmt.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: pmt::is_u16vector(pmt_t)
+   :project: gnuradio

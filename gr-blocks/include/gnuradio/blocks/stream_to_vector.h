@@ -19,7 +19,8 @@ namespace blocks {
 
 /*!
  * \brief convert a stream of items into a stream of gnuradio/blocks containing
- * nitems_per_block \ingroup stream_operators_blk
+ * nitems_per_block
+ * \ingroup block_blocks_stream_to_vector
  */
 class BLOCKS_API stream_to_vector : virtual public sync_decimator
 {

@@ -1,0 +1,14 @@
+.. _exhale_function_xoroshiro128p_8h_1a1f29705017628be113d344160ed33063:
+
+Function splitmix64_next
+========================
+
+- Defined in :ref:`file_gnuradio_gnuradio-runtime_include_gnuradio_xoroshiro128p.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: splitmix64_next(uint64_t *)
+   :project: gnuradio

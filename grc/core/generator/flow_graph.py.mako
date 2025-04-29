@@ -27,6 +27,9 @@
 % if generate_options in ['qt_gui','hb_qt_gui']:
 from PyQt5 import Qt
 from gnuradio import qtgui
+% elif genrate_options == 'pyqtgraph':
+import pyqtgraph as pg
+from gnuradio import gr_pyqtgraph
 %endif
 % for imp in imports:
 ##${imp.replace("  # grc-generated hier_block", "")}
@@ -103,6 +106,13 @@ class ${class_name}(gr.top_block, Qt.QWidget):
                 self.restoreGeometry(geometry)
         except BaseException as exc:
             print(f"Qt GUI: Could not restore geometry: {str(exc)}", file=sys.stderr)
+% elif generate_options == 'pyqtgraph':
+class ${class_name}(gr.top_block, QMainWindow):
+    def __init__(${param_str}):
+        gr.top_block.__init__(self, "${title}", catch_exceptions=${catch_exceptions})
+        QMainWindow.__init__(self)
+        self.widget_lst = []
+
 % elif generate_options == 'bokeh_gui':
 
 class ${class_name}(gr.top_block):

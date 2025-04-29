@@ -10,9 +10,13 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+import textwrap
+from pathlib import Path
+
+sys.path.insert(0, os.path.abspath("/usr/local/lib/python3.10/dist-packages/"))
+sys.path.insert(0, os.path.abspath("/usr/local/lib/python3.10/dist-packages/gnuradio/"))
 
 
 # -- Project information -----------------------------------------------------
@@ -35,9 +39,12 @@ sys.path.append(os.path.abspath("./_extensions"))
 # ones.
 extensions = [
     "breathe",
-    # "exhale",
+    "exhale",
     "gr_wiki_link",
     "sphinx_tabs.tabs",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosectionlabel",
+    "sphinx.ext.autosummary",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -47,6 +54,7 @@ templates_path = ["_templates"]
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+autosummary_generate = False
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -73,24 +81,30 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 
-# -- Breathe (C++) configuration
-breathe_projects = {"gnuradio": "../doxygen/xml"}
+this_file_dir = Path(__file__).parent.resolve()
+doxygen_xml_dir = this_file_dir / "build/xml"
 
+# -- Breathe (C++) configuration
+breathe_projects = {"gnuradio": str(doxygen_xml_dir)}
 breathe_default_project = "gnuradio"
 
-# exhale_args = {
-#     # These arguments are required
-#     "containmentFolder": "./api",
-#     "rootFileName": "library_root.rst",
-#     "doxygenStripFromPath": "..",
-#     # Heavily encouraged optional argument (see docs)
-#     "rootFileTitle": "Library API",
-#     # Suggested optional arguments
-#     "createTreeView": True,
-#     # TIP: if using the sphinx-bootstrap-theme, you need
-#     "treeViewIsBootstrap": True,
-#     "exhaleExecutesDoxygen": False,
-# }
+exhale_args = {
+    # These arguments are required
+    "containmentFolder": "./cpp_api",
+    "rootFileName": "library_root.rst",
+    "rootFileTitle": "C++ API",
+    "doxygenStripFromPath": "../../",
+    "createTreeView": True,
+    "exhaleExecutesDoxygen": True,
+    "exhaleUseDoxyfile": True,
+    "contentsTitle": "Page Contents",
+    "kindsWithContentsDirectives": ["class", "file", "namespace", "struct"],
+    "afterTitleDescription": textwrap.dedent(
+        """
+        Welcome to the developer reference for the PyTorch C++ API.
+    """
+    ),
+}
 
 # Tell sphinx what the primary language being documented is.
 primary_domain = "cpp"
@@ -100,7 +114,6 @@ highlight_language = "cpp"
 
 
 def setup(app):
-    from breathe.renderer.sphinxrenderer import (CMacroObject,
-                                                 DomainDirectiveFactory)
+    from breathe.renderer.sphinxrenderer import CMacroObject, DomainDirectiveFactory
 
     DomainDirectiveFactory.cpp_classes["property"] = (CMacroObject, "macro")

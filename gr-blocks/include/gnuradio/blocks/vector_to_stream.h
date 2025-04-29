@@ -18,8 +18,9 @@ namespace gr {
 namespace blocks {
 
 /*!
- * \brief convert a stream of gnuradio/blocks of nitems_per_block items into a stream of
- * items \ingroup stream_operators_blk
+ * \brief convert a stream of gnuradio/blocks of nitems_per_block items
+ * into a stream of items
+ * \ingroup block_blocks_vector_to_stream
  */
 class BLOCKS_API vector_to_stream : virtual public sync_interpolator
 {

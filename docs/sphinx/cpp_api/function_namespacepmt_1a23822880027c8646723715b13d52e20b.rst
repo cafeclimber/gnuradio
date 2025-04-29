@@ -1,0 +1,14 @@
+.. _exhale_function_namespacepmt_1a23822880027c8646723715b13d52e20b:
+
+Function pmt::s64vector_elements(pmt_t, size_t&)
+================================================
+
+- Defined in :ref:`file_gnuradio_gnuradio-runtime_include_pmt_pmt.h`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: pmt::s64vector_elements(pmt_t, size_t&)
+   :project: gnuradio
