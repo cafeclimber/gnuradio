@@ -7,10 +7,9 @@
 
 import collections
 import itertools
-import sys
 import types
 import logging
-import shlex
+import yaml
 from operator import methodcaller, attrgetter
 from typing import (List, Set, Optional, Iterator, Iterable, Tuple, Union, OrderedDict)
 
@@ -185,18 +184,13 @@ class FlowGraph(Element):
 
         Returns:
             the value held by that param
+            will return None if the key param key doesn't exist
         """
-        return self.options_block.params[key].get_evaluated()
-
-    def get_run_command(self, file_path, split=False) -> Union[str, List[str]]:
-        run_command = self.get_option('run_command')
-        try:
-            run_command = run_command.format(
-                python=shlex.quote(sys.executable),
-                filename=shlex.quote(file_path))
-            return shlex.split(run_command) if split else run_command
-        except Exception as e:
-            raise ValueError(f"Can't parse run command {repr(run_command)}: {e}")
+        param = self.options_block.params.get(key)
+        if param:
+            return param.get_evaluated()
+        else:
+            return None
 
     def get_imported_names(self) -> Set[str]:
         """
@@ -289,7 +283,7 @@ class FlowGraph(Element):
                 # rewrite on subsequent blocks depends on an updated self.namespace
                 self.namespace.update(namespace)
             # The following Errors may happen, but that doesn't matter as they are displayed in the gui
-            except (TypeError, FileNotFoundError, AttributeError):
+            except (TypeError, FileNotFoundError, AttributeError, yaml.YAMLError):
                 pass
             except Exception:
                 log.exception(f'Failed to evaluate variable block {variable_block.name}', exc_info=True)
@@ -467,6 +461,7 @@ class FlowGraph(Element):
 
         # build the blocks
         self.options_block.import_data(name='', **data.get('options', {}))
+        self.options_block.insert_grc_parameters(data['options']['parameters'])
         self.blocks.append(self.options_block)
 
         for block_data in data.get('blocks', []):
@@ -494,7 +489,7 @@ class FlowGraph(Element):
                 if block.is_dummy_block:
                     port = block.add_missing_port(key, dir)
                 else:
-                    raise LookupError(f"{dir} key {key} not in {dir} blcock keys")
+                    raise LookupError(f"{dir} key {key} not in {dir} block keys")
             return port
 
         had_connect_errors = False

@@ -11,8 +11,9 @@
 #ifndef INCLUDED_MMSE_RESAMPLER_CC_H
 #define INCLUDED_MMSE_RESAMPLER_CC_H
 
-#include <gnuradio/block.h>
 #include <gnuradio/filter/api.h>
+#include <gnuradio/filter/mmse_resampler.h>
+#include <gnuradio/types.h>
 
 namespace gr {
 namespace filter {

@@ -4,6 +4,8 @@ import logging
 from pathlib import Path
 
 from qtpy import QtGui, QtCore
+from qtpy.QtGui import QPageLayout
+from qtpy.QtPrintSupport import QPrinter
 
 from . import Constants
 
@@ -58,37 +60,20 @@ def num_to_str(num):
         return str(num)
 
 
-_nproc = None
-
-
-def get_cmake_nproc():
-    """ Get number of cmake processes for C++ flowgraphs """
-    global _nproc  # Cached result
-    if _nproc:
-        return _nproc
-    try:
-        # See https://docs.python.org/3.8/library/os.html#os.cpu_count
-        _nproc = len(os.sched_getaffinity(0))
-    except:
-        _nproc = os.cpu_count()
-    if not _nproc:
-        _nproc = 1
-
-    _nproc = max(_nproc // 2 - 1, 1)
-    return _nproc
-
-
 def make_screenshot(fg_view, file_path, transparent_bg=False):
     if not file_path:
         return
     file_path = Path(file_path)
-    if file_path.suffix == ".png":
-        rect = fg_view.viewport().rect()
 
-        pixmap = QtGui.QPixmap(rect.size())
+    target_rect = fg_view.scene().sceneRect()  # Float
+    source_rect = target_rect.toRect()  # Converted to int
+
+    if file_path.suffix == ".png":
+
+        pixmap = QtGui.QPixmap(source_rect.size())
         painter = QtGui.QPainter(pixmap)
 
-        fg_view.render(painter, QtCore.QRectF(pixmap.rect()), rect)
+        fg_view.render(painter, target_rect, source_rect)
         pixmap.save(str(file_path), "PNG")
         painter.end()
     elif file_path.suffix == ".svg":
@@ -97,14 +82,20 @@ def make_screenshot(fg_view, file_path, transparent_bg=False):
         except ImportError:
             log.error("Missing (Python-)QtSvg! Please install it or export as PNG instead.")
             return
-        rect = fg_view.viewport().rect()
 
         generator = QtSvg.QSvgGenerator()
         generator.setFileName(str(file_path))
-        generator.setSize(rect.size())
         painter = QtGui.QPainter(generator)
-        fg_view.render(painter)
+        fg_view.render(painter, target_rect, source_rect)
         painter.end()
     elif file_path.suffix == ".pdf":
-        log.warning("PDF screen capture not implemented")
-        return  # TODO
+        pdf_printer = QPrinter(QPrinter.PrinterMode.ScreenResolution)
+        pdf_printer.setOutputFormat(QPrinter.OutputFormat.PdfFormat)
+        page_layout = QPageLayout()
+        page_layout.setOrientation(QPageLayout.Landscape)
+        pdf_printer.setPageLayout(page_layout)
+        pdf_printer.setOutputFileName(str(file_path))
+        painter = QtGui.QPainter(pdf_printer)
+        fg_view.render(painter, pdf_printer.pageRect(QPrinter.Unit.DevicePixel), source_rect)
+        painter.end()
+        return

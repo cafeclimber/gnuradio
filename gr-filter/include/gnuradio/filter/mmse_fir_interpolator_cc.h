@@ -1,6 +1,7 @@
 /* -*- c++ -*- */
 /*
  * Copyright 2002,2007,2012 Free Software Foundation, Inc.
+ * Copyright 2025 Marcus Müller
  *
  * This file is part of GNU Radio
  *
@@ -11,9 +12,8 @@
 #define _GRI_MMSE_FIR_INTERPOLATOR_CC_H_
 
 #include <gnuradio/filter/api.h>
-#include <gnuradio/filter/fir_filter.h>
+#include <gnuradio/filter/mmse_fir_interpolator.h>
 #include <gnuradio/gr_complex.h>
-#include <vector>
 
 namespace gr {
 namespace filter {
